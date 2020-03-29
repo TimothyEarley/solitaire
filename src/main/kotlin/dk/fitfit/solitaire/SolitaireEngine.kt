@@ -111,6 +111,7 @@ class SolitaireEngine(size: Int) {
                             // Assert target is empty
                             && board[i - it.value.first][j - it.value.second] == EMPTY) {
                             stall = false
+                            return
                         }
                     }
                 }
