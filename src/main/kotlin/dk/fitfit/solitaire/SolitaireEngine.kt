@@ -56,10 +56,10 @@ class SolitaireEngine(size: Int) {
         val to = board[trow][tcol]
 
         if (from != FULL) {
-            throw IllegalAccessException("From not full")
+            throw IllegalStateException("From not full")
         }
         if (to != EMPTY) {
-            throw IllegalAccessException("To not empty")
+            throw IllegalStateException("To not empty")
         }
 
         val moveToNeighbour = mapOf(
@@ -69,12 +69,12 @@ class SolitaireEngine(size: Int) {
             Pair(0, 2) to Pair(0, 1)
         )
         val move = Pair(tcol - col, trow - row)
-        val neighbour = moveToNeighbour[move] ?: throw IllegalAccessException("Illegal move")
+        val neighbour = moveToNeighbour[move] ?: throw IllegalStateException("Illegal move")
         val rowRemove = trow - neighbour.second
         val colRemove = tcol - neighbour.first
 
         if (board[rowRemove][colRemove] != FULL) {
-            throw IllegalAccessException("Illegal move, empty... Remove piece")
+            throw IllegalStateException("Illegal move, empty... Remove piece")
         } else {
             board[row][col] = EMPTY
             board[rowRemove][colRemove] = EMPTY
