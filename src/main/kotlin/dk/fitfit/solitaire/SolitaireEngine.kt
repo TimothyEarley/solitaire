@@ -3,8 +3,14 @@ package dk.fitfit.solitaire
 import dk.fitfit.solitaire.SolitaireEngine.TILE.*
 
 class SolitaireEngine(size: Int) {
-    var stall = false
-    var win = false
+    val stalled
+        get() = isStalled()
+
+    val piecesLeft
+        get() = board.flatten().count { it == FULL }
+
+    val win
+        get() = piecesLeft == 1
 
     enum class TILE(val symbol: String) {
         ILLEGAL("I"), EMPTY("E"), FULL("F")
@@ -74,18 +80,9 @@ class SolitaireEngine(size: Int) {
             board[rowRemove][colRemove] = EMPTY
             board[trow][tcol] = FULL
         }
-
-        detectWin()
-        detectStall()
     }
 
-    private fun detectWin() {
-        win = board.flatten().count { it == FULL } == 1
-    }
-
-    private fun detectStall() {
-        stall = true
-
+    private fun isStalled(): Boolean {
         for ((i, r) in board.withIndex()) {
             for ((j, _) in r.withIndex()) {
                 val tile = board[i][j]
@@ -110,12 +107,12 @@ class SolitaireEngine(size: Int) {
                             && newTargetCol >= 0 && newTargetCol < board.size
                             // Assert target is empty
                             && board[i - it.value.first][j - it.value.second] == EMPTY) {
-                            stall = false
-                            return
+                            return false
                         }
                     }
                 }
             }
         }
+        return true
     }
 }

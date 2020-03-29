@@ -76,8 +76,8 @@ class FXApplication {
                     println(e.message)
                 }
 
-                if (engine.stall) {
-                    println("Game over!")
+                if (engine.stalled) {
+                    println("Game over! ${engine.piecesLeft} pieces left")
                 }
 
                 if (engine.win) {
