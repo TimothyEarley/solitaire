@@ -4,3 +4,12 @@ A very simple game developed using Java and JavaFX for the purpose of enhancing 
 
 ## Start
 `./gradlew run`
+
+More boards
+https://en.wikipedia.org/wiki/Peg_solitaire
+
+More levels
+https://www.youtube.com/watch?v=H9BkeS4oS8w
+
+
+User created levels... Users? Ratings, scores?
